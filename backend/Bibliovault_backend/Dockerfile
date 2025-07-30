@@ -1,28 +1,29 @@
-# Use OpenJDK 11 (adjust version if needed)
+# Use OpenJDK 11
 FROM openjdk:11-jdk-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy Maven wrapper and pom.xml
-COPY mvnw .
-COPY .mvn .mvn
-COPY pom.xml .
+# Copy Gradle wrapper and build files
+COPY gradlew .
+COPY gradle gradle
+COPY build.gradle .
+COPY settings.gradle .
 
-# Make mvnw executable
-RUN chmod +x ./mvnw
+# Make gradlew executable
+RUN chmod +x ./gradlew
 
 # Download dependencies
-RUN ./mvnw dependency:go-offline -B
+RUN ./gradlew dependencies --no-daemon
 
 # Copy source code
 COPY src ./src
 
 # Build the application
-RUN ./mvnw clean package -DskipTests -B
+RUN ./gradlew build -x test --no-daemon
 
 # Expose port
 EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "target/*.jar"]
+CMD ["java", "-jar", "build/libs/*.jar"]
