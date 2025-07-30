@@ -1,19 +1,18 @@
-# Use OpenJDK 11
-FROM openjdk:11-jdk-slim
+# Stage 1: Build stage
+FROM openjdk:11-jdk-slim AS build
 
-# Set working directory
 WORKDIR /app
 
-# Copy Gradle wrapper and build files
+# Copy Gradle wrapper and build files first (better layer caching)
 COPY gradlew .
-COPY gradle gradle
+COPY gradle gradle/
 COPY build.gradle .
 COPY settings.gradle .
 
 # Make gradlew executable
 RUN chmod +x ./gradlew
 
-# Download dependencies
+# Download dependencies (cached layer if dependencies don't change)
 RUN ./gradlew dependencies --no-daemon
 
 # Copy source code
@@ -22,8 +21,26 @@ COPY src ./src
 # Build the application
 RUN ./gradlew build -x test --no-daemon
 
+# Stage 2: Runtime stage
+FROM openjdk:11-jre-slim
+
+# Create non-root user for security
+RUN groupadd --system --gid 1000 spring && \
+    useradd --system --uid 1000 --gid spring --shell /bin/false spring
+
+WORKDIR /app
+
+# Copy the JAR file from build stage
+COPY --from=build /app/build/libs/*.jar app.jar
+
+# Change ownership to spring user
+RUN chown spring:spring /app/app.jar
+
+# Switch to non-root user
+USER spring
+
 # Expose port
 EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "build/libs/*.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
