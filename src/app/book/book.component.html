@@ -1,0 +1,118 @@
+<div class="alert-container" *ngIf="deletionStatus">
+  <div class="alert alert-success" role="alert">
+    Book Deletion Successfully Completed
+  </div>
+</div>
+<div class="alert-container" *ngIf="registrationSuccess">
+  <div class="alert alert-success" role="alert">
+    Book Registration Successfully Completed
+  </div>
+</div>
+<div class="alert-container" *ngIf="registrationError">
+  <div class="alert alert-danger" role="alert">
+    {{registrationError}}
+  </div>
+</div>
+<div class="row align-items-center mb-4">
+  <div class="col-md-3 text-center">
+    <div class="image-container" (mouseenter)="swapImage()" (mouseleave)="swapImage()">
+      <img [src]="currentImage" alt="Book" class="book-hero-img-small fade" [class.active]="!isImageSwapped"/>
+      <img src="assets/img/library.jpg" alt="Library" class="book-hero-img-small fade" [class.active]="isImageSwapped"/>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <h1 class="display-5">Book Registration</h1>
+    <p class="lead">Register and manage your books. <strong>Made by Lakshay Garg</strong>
+      <a href="https://www.linkedin.com/in/lakshay-garg-0b0021194/" target="_blank" class="social-link">
+        <i class="bi bi-linkedin"></i>
+      </a>
+      <a href="https://github.com/lakshaygeek511/BiblioVault" target="_blank" class="social-link">
+        <i class="bi bi-github"></i>
+      </a>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title">Book Registration</h4>
+        <form [formGroup]="registerBookForm" (ngSubmit)="onSubmit(registerBookForm.value)">
+          <div class="form-group mb-3">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name"
+              [class.is-invalid]="registerBookForm.get('name').invalid && registerBookForm.get('name').touched"/>
+            <div class="invalid-feedback" *ngIf="registerBookForm.get('name').errors?.required && registerBookForm.get('name').touched">
+              Book name is required
+            </div>
+            <div class="invalid-feedback" *ngIf="registerBookForm.get('name').errors?.minlength && registerBookForm.get('name').touched">
+              Book name must be at least 2 characters long
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="isbn">ISBN</label>
+            <input type="text" class="form-control" id="isbn" formControlName="isbn"
+              [class.is-invalid]="registerBookForm.get('isbn').invalid && registerBookForm.get('isbn').touched"/>
+            <div class="invalid-feedback" *ngIf="registerBookForm.get('isbn').errors?.required && registerBookForm.get('isbn').touched">
+              ISBN is required
+            </div>
+            <div class="invalid-feedback" *ngIf="registerBookForm.get('isbn').errors?.pattern && registerBookForm.get('isbn').touched">
+              Invalid ISBN format. Please enter a valid ISBN-10 or ISBN-13
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="author">Author</label>
+            <select class="custom-select" formControlName="authorId"
+              [class.is-invalid]="registerBookForm.get('authorId').invalid && registerBookForm.get('authorId').touched">
+              <option value="">Select an author</option>
+              <option *ngFor="let author of authors" [value]="author.id">
+                {{author.firstName}} {{author.lastName}}
+              </option>
+            </select>
+            <div class="invalid-feedback" *ngIf="registerBookForm.get('authorId').errors?.required && registerBookForm.get('authorId').touched">
+              Author selection is required
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body scrollable-card">
+        <h4 class="card-title">Registered Books</h4>
+        <div *ngIf="!books?.length" class="empty-message">
+          <i class="bi bi-book"></i>
+          <p>No books registered yet</p>
+        </div>
+        <div class="table-container" *ngIf="books?.length">
+          <div class="table-wrapper">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">ISBN</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let book of books">
+                  <td>{{book.id}}</td>
+                  <td>{{book.name}}</td>
+                  <td>{{book.isbn}}</td>
+                  <td>
+                    <button class="btn btn-sm btn-danger me-1" (click)="deleteBook(book.id)">Delete</button>
+                    <a class="btn btn-sm btn-secondary" href="/book/{{book.id}}">Edit</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  

@@ -1,0 +1,98 @@
+<div class="alert-container" *ngIf="registrationSuccess">
+  <div class="alert alert-success" role="alert">
+    Member Registration Successfully Completed
+  </div>
+</div>
+<div class="alert-container" *ngIf="registrationError">
+  <div class="alert alert-danger" role="alert">
+    {{registrationError}}
+  </div>
+</div>
+<div class="row align-items-center mb-4">
+  <div class="col-md-3 text-center">
+    <img src="assets/img/member.jpg" alt="Member" class="member-hero-img-small"/>
+  </div>
+  <div class="col-md-9">
+    <h1 class="display-5">Member Registration</h1>
+    <p class="lead">Register and manage your members. <strong>Made by Lakshay Garg</strong>
+      <a href="https://www.linkedin.com/in/lakshay-garg-0b0021194/" target="_blank" class="social-link">
+        <i class="bi bi-linkedin"></i>
+      </a>
+      <a href="https://github.com/lakshaygeek511/BiblioVault" target="_blank" class="social-link">
+        <i class="bi bi-github"></i>
+      </a>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title">Member Registration</h4>
+        <form [formGroup]="memberRegistrationForm" (ngSubmit)="onSubmit(memberRegistrationForm.value)">
+          <div class="form-group mb-3">
+            <label for="member_f_name">First Name</label>
+            <input type="text" class="form-control" id="member_f_name" formControlName="firstName"
+              [class.is-invalid]="memberRegistrationForm.get('firstName').invalid && memberRegistrationForm.get('firstName').touched"/>
+            <div class="invalid-feedback" *ngIf="memberRegistrationForm.get('firstName').errors?.required && memberRegistrationForm.get('firstName').touched">
+              First name is required
+            </div>
+            <div class="invalid-feedback" *ngIf="memberRegistrationForm.get('firstName').errors?.minlength && memberRegistrationForm.get('firstName').touched">
+              First name must be at least 2 characters long
+            </div>
+            <div class="invalid-feedback" *ngIf="memberRegistrationForm.get('firstName').errors?.pattern && memberRegistrationForm.get('firstName').touched">
+              First name can only contain letters and spaces
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="member_l_name">Last Name</label>
+            <input type="text" class="form-control" id="member_l_name" formControlName="lastName"
+              [class.is-invalid]="memberRegistrationForm.get('lastName').invalid && memberRegistrationForm.get('lastName').touched"/>
+            <div class="invalid-feedback" *ngIf="memberRegistrationForm.get('lastName').errors?.required && memberRegistrationForm.get('lastName').touched">
+              Last name is required
+            </div>
+            <div class="invalid-feedback" *ngIf="memberRegistrationForm.get('lastName').errors?.minlength && memberRegistrationForm.get('lastName').touched">
+              Last name must be at least 2 characters long
+            </div>
+            <div class="invalid-feedback" *ngIf="memberRegistrationForm.get('lastName').errors?.pattern && memberRegistrationForm.get('lastName').touched">
+              Last name can only contain letters and spaces
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body scrollable-card">
+        <h4 class="card-title">Registered Members</h4>
+        <div *ngIf="!members?.length" class="empty-message">
+          <i class="bi bi-people"></i>
+          <p>No members registered yet</p>
+        </div>
+        <div class="table-container" *ngIf="members?.length">
+          <div class="table-wrapper">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let member of members">
+                  <td>{{member.id}}</td>
+                  <td>{{member.firstName}}</td>
+                  <td>{{member.lastName}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  

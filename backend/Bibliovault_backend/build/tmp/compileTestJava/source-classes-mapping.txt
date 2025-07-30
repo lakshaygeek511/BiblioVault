@@ -1,0 +1,2 @@
+com/javatodev/api/SpringBootRestApiMysqlApplicationTests.java
+ com.javatodev.api.SpringBootRestApiMysqlApplicationTests

@@ -1,0 +1,35 @@
+com/bibliovault/api/repository/MemberRepository.java
+ com.bibliovault.api.repository.MemberRepository
+com/bibliovault/api/repository/LendRepository.java
+ com.bibliovault.api.repository.LendRepository
+com/bibliovault/api/SpringBootRestApiMysqlApplication.java
+ com.bibliovault.api.SpringBootRestApiMysqlApplication
+com/bibliovault/api/controller/LibraryController.java
+ com.bibliovault.api.controller.LibraryController
+com/bibliovault/api/model/request/AuthorCreationRequest.java
+ com.bibliovault.api.model.request.AuthorCreationRequest
+com/bibliovault/api/repository/AuthorRepository.java
+ com.bibliovault.api.repository.AuthorRepository
+com/bibliovault/api/model/Lend.java
+ com.bibliovault.api.model.Lend
+com/bibliovault/api/model/Book.java
+ com.bibliovault.api.model.Book
+ com.bibliovault.api.model.Book$BookBuilder
+com/bibliovault/api/model/request/BookLendRequest.java
+ com.bibliovault.api.model.request.BookLendRequest
+com/bibliovault/api/repository/BookRepository.java
+ com.bibliovault.api.repository.BookRepository
+com/bibliovault/api/model/request/BookCreationRequest.java
+ com.bibliovault.api.model.request.BookCreationRequest
+com/bibliovault/api/model/LendStatus.java
+ com.bibliovault.api.model.LendStatus
+com/bibliovault/api/service/LibraryService.java
+ com.bibliovault.api.service.LibraryService
+com/bibliovault/api/model/Member.java
+ com.bibliovault.api.model.Member
+com/bibliovault/api/model/request/MemberCreationRequest.java
+ com.bibliovault.api.model.request.MemberCreationRequest
+com/bibliovault/api/model/Author.java
+ com.bibliovault.api.model.Author
+com/bibliovault/api/model/MemberStatus.java
+ com.bibliovault.api.model.MemberStatus

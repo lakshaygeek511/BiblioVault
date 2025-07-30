@@ -1,0 +1,25 @@
+.container {
+  padding-bottom: 4px;
+}
+hr {
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+.nav {
+  margin-bottom: 0;
+}
+.nav-icon {
+  font-size: 1.5rem;
+  transition: transform 0.2s ease;
+}
+.nav-link:hover .nav-icon {
+  transform: scale(1.2);
+}
+.nav-link {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+.nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}

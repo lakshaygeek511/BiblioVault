@@ -1,0 +1,58 @@
+<div class="alert-container" *ngIf="updateSuccess">
+  <div class="alert alert-success" role="alert">
+    Book Update Successfully Completed
+  </div>
+</div>
+<div class="alert-container" *ngIf="updateError">
+  <div class="alert alert-danger" role="alert">
+    {{updateError}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title">Update Book</h4>
+        <form [formGroup]="updateBookForm" (ngSubmit)="onSubmit(updateBookForm.value)">
+          <div class="form-group mb-3">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name"
+              [class.is-invalid]="updateBookForm.get('name').invalid && updateBookForm.get('name').touched"/>
+            <div class="invalid-feedback" *ngIf="updateBookForm.get('name').errors?.required && updateBookForm.get('name').touched">
+              Book name is required
+            </div>
+            <div class="invalid-feedback" *ngIf="updateBookForm.get('name').errors?.minlength && updateBookForm.get('name').touched">
+              Book name must be at least 2 characters long
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="isbn">ISBN</label>
+            <input type="text" class="form-control" id="isbn" formControlName="isbn"
+              [class.is-invalid]="updateBookForm.get('isbn').invalid && updateBookForm.get('isbn').touched"/>
+            <div class="invalid-feedback" *ngIf="updateBookForm.get('isbn').errors?.required && updateBookForm.get('isbn').touched">
+              ISBN is required
+            </div>
+            <div class="invalid-feedback" *ngIf="updateBookForm.get('isbn').errors?.pattern && updateBookForm.get('isbn').touched">
+              Invalid ISBN format. Please enter a valid ISBN-10 or ISBN-13
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="author">Author</label>
+            <select class="custom-select" formControlName="authorId"
+              [class.is-invalid]="updateBookForm.get('authorId').invalid && updateBookForm.get('authorId').touched">
+              <option value="">Select an author</option>
+              <option *ngFor="let author of authors" [value]="author.id">
+                {{author.firstName}} {{author.lastName}}
+              </option>
+            </select>
+            <div class="invalid-feedback" *ngIf="updateBookForm.get('authorId').errors?.required && updateBookForm.get('authorId').touched">
+              Author selection is required
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Update Book</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  

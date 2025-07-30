@@ -1,0 +1,147 @@
+<div class="alert-container" *ngIf="lendingStatus">
+  <div class="alert alert-success" role="alert">
+    Book lending request successfully completed
+  </div>
+</div>
+<div class="alert-container" *ngIf="lendingError">
+  <div class="alert alert-danger" role="alert">
+    {{lendingError}}
+  </div>
+</div>
+<div class="row align-items-center mb-4">
+  <div class="col-md-3 text-center">
+    <div class="image-container" (mouseenter)="swapImage()" (mouseleave)="swapImage()">
+      <img [src]="currentImage" alt="Library" class="library-hero-img-small fade" [class.active]="!isImageSwapped"/>
+      <img src="assets/img/book.jpg" alt="Book" class="library-hero-img-small fade" [class.active]="isImageSwapped"/>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <h1 class="display-5">Welcome to <span class="text-primary">BiblioVault</span></h1>
+    <p class="lead">A modern library system. <strong>Made by Lakshay Garg</strong>
+      <a href="https://www.linkedin.com/in/lakshay-garg-0b0021194/" target="_blank" class="social-link">
+        <i class="bi bi-linkedin"></i>
+      </a>
+      <a href="https://github.com/lakshaygeek511/BiblioVault" target="_blank" class="social-link">
+        <i class="bi bi-github"></i>
+      </a>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title">Borrow a Book</h4>
+        <div class="form-group mb-3">
+          <label for="member">Select Member</label>
+          <div class="search-container">
+            <input type="text" class="form-control" placeholder="Search member... ID: BVXXX" [(ngModel)]="memberSearch" 
+              (input)="filterMembers()" [class.is-invalid]="!selectedMember && showValidation"/>
+            <div class="search-results" *ngIf="memberSearch && filteredMembers?.length > 0">
+              <div class="search-item" *ngFor="let member of filteredMembers" 
+                (click)="selectMember(member)">
+                BV{{member.id}} - {{member.firstName}} {{member.lastName}}
+              </div>
+            </div>
+            <div class="search-no-results" *ngIf="memberSearch && filteredMembers?.length === 0">
+              No members found
+            </div>
+            <div class="invalid-feedback" *ngIf="!selectedMember && showValidation">
+              Please select a member
+            </div>
+          </div>
+          <div class="selected-member mt-2" *ngIf="selectedMember">
+            Selected: <strong>BV{{selectedMemberDetails?.id}} - {{selectedMemberDetails?.firstName}} {{selectedMemberDetails?.lastName}}</strong>
+            <button class="btn btn-sm btn-link text-danger" (click)="clearMember()">Clear</button>
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <label for="book">Select Books</label>
+          <div class="search-container">
+            <input type="text" class="form-control" placeholder="Search book by name or ISBN..." 
+              [(ngModel)]="bookSearch" (input)="filterBooks()"
+              [class.is-invalid]="selectedBooks.length === 0 && showValidation"/>
+            <div class="search-results" *ngIf="bookSearch && filteredBooks?.length > 0">
+              <div class="search-item" *ngFor="let book of filteredBooks" 
+                (click)="selectBook(book)">
+                {{book.name}} (ISBN: {{book.isbn}})
+              </div>
+            </div>
+            <div class="search-no-results" *ngIf="bookSearch && filteredBooks?.length === 0">
+              No books found
+            </div>
+            <div class="invalid-feedback" *ngIf="selectedBooks.length === 0 && showValidation">
+              Please select at least one book
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-success w-100" (click)="validateAndLend()">Lend the books</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body scrollable-card">
+        <h4 class="card-title">{{showLentBooks ? 'Currently Lent Books' : 'Selected Books'}}</h4>
+        
+        <!-- Show empty message based on current view -->
+        <div *ngIf="(showLentBooks && lentBooks.length === 0) || (!showLentBooks && selectedBooks.length === 0)" class="empty-message">
+          <i class="bi" [ngClass]="{'bi-book': !showLentBooks, 'bi-collection': showLentBooks}"></i>
+          <p>{{showLentBooks ? 'No books currently lent to this member' : 'No books selected for lending'}}</p>
+        </div>
+        
+        <!-- Show table for currently lent books -->
+        <div class="table-container" *ngIf="showLentBooks && lentBooks.length > 0">
+          <div class="table-wrapper">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">ISBN</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let book of lentBooks">
+                  <td>{{book.id}}</td>
+                  <td>{{book.name}}</td>
+                  <td>{{book.isbn}}</td>
+                  <td>
+                    <span class="badge bg-success">Lent</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- Show table for selected books (for new lending) -->
+        <div class="table-container" *ngIf="!showLentBooks && selectedBooks.length > 0">
+          <div class="table-wrapper">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">ISBN</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let book of selectedBooks">
+                  <td>{{book.id}}</td>
+                  <td>{{book.name}}</td>
+                  <td>{{book.isbn}}</td>
+                  <td>
+                    <button class="btn btn-sm btn-danger" (click)="removeBook(book.id)">Remove</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

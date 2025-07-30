@@ -1,0 +1,218 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { 
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background-attachment: fixed;
+}
+
+.card {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border: none !important;
+}
+
+.table {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-primary {
+  background: linear-gradient(to right, #4e54c8, #8f94fb);
+  border: none;
+}
+
+.btn-success {
+  background: linear-gradient(to right, #0ba360, #3cba92);
+  border: none;
+}
+
+.btn-danger {
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  border: none;
+}
+
+.btn-secondary {
+  background: linear-gradient(to right, #606c88, #3f4c6b);
+  border: none;
+}
+
+.social-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+  vertical-align: middle;
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+}
+
+.social-link {
+  color: #666;
+  margin-left: 8px;
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+  display: inline-block;
+}
+
+.social-link:hover {
+  transform: scale(1.2);
+  color: #333;
+}
+
+.social-link .bi {
+  font-size: 1.25rem;
+}
+
+.bi-linkedin:hover {
+  color: #0077b5;
+}
+
+.bi-github:hover {
+  color: #333;
+}
+
+.alert-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1050;
+  min-width: 300px;
+  max-width: 400px;
+}
+
+.alert {
+  margin-bottom: 0;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.3s ease-out, fadeOut 0.5s ease-out 2s forwards;
+}
+
+.alert-success {
+  background: linear-gradient(to right, #0ba360, #3cba92);
+  color: white;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Custom Scrollbar Styles */
+.scrollable-card {
+  max-height: 350px;
+  overflow: hidden;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* For Webkit browsers (Chrome, Safari) */
+.scrollable-card::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+.scrollable-card::-webkit-scrollbar-thumb {
+  background: #e0e0e0;
+  border-radius: 3px;
+}
+
+.scrollable-card::-webkit-scrollbar-thumb:hover {
+  background: #bdbdbd;
+}
+
+.scrollable-card::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* For Firefox */
+.scrollable-card {
+  scrollbar-width: thin;
+  scrollbar-color: #e0e0e0 transparent;
+}
+
+/* Ensure table header stays fixed */
+.scrollable-card .table-header {
+  position: absolute;
+  top: 0;
+  background: white;
+  z-index: 1;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.scrollable-card .table {
+  margin-bottom: 0;
+}
+
+.scrollable-card .card-body {
+  display: flex;
+  flex-direction: column;
+  padding-right: calc(1rem + 6px);
+}
+
+.table-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 0;
+}
+
+.table-wrapper {
+  position: relative;
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1;
+  border-top: none;
+}
+
+.table thead th::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: #6c757d;
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.empty-message i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
