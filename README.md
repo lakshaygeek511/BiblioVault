@@ -83,16 +83,6 @@ A full-stack library management system built with **Spring Boot** backend and **
 ![Member Books](images/member-books.png)
 *Track books borrowed by specific members*
 
-## 🏗️ Architecture
-
-┌─────────────────┐ ┌──────────────────┐ ┌─────────────────┐
-│ │ │ │ │ │
-│ Angular 10 │────▶│ Spring Boot │────▶│ PostgreSQL │
-│ Frontend │ │ REST API │ │ Database │
-│ │ │ │ │ │
-└─────────────────┘ └──────────────────┘ └─────────────────┘
-Netlify Render Neon DB
-
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -180,31 +170,6 @@ Frontend will be available at: `http://localhost:4200`
 - **Publish directory**: `dist/springboot-angular10-crud`
 - **Node version**: 16.20.0
 
-## 📁 Project Structure
-
-BiblioVault/
-├── src/ # Spring Boot backend
-│ ├── main/
-│ │ ├── java/
-│ │ │ └── com/bibliovault/api/
-│ │ │ ├── controller/ # REST controllers
-│ │ │ ├── model/ # Entity models
-│ │ │ ├── repository/ # JPA repositories
-│ │ │ └── service/ # Business logic
-│ │ └── resources/
-│ │ └── application*.properties
-├── frontend/ # Angular frontend
-│ ├── src/
-│ │ ├── app/
-│ │ │ ├── components/ # Angular components
-│ │ │ ├── services/ # API services
-│ │ │ └── models/ # TypeScript models
-│ │ └── assets/ # Static assets
-├── images/ # README screenshots
-└── README.md
-
-text
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -229,7 +194,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Angular team for the powerful frontend framework
 - Bootstrap and Angular Material for UI components
 - Render and Netlify for seamless deployment
-
----
-
-⭐ **Star this repository if you found it helpful!**
