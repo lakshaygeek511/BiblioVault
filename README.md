@@ -9,7 +9,19 @@ A full-stack library management system built with **Spring Boot** backend and **
 
 ## 🚀 Features
 
-### 📖 Book Management
+### 🏠 Home Page ( 📋 Library / Lending System )
+<img width="1347" height="672" alt="image" src="https://github.com/user-attachments/assets/85200997-98cf-490f-a856-592b58117767" />
+Main dashboard with quick access to all library functions
+
+- ✅ Book lending and return functionality
+- ✅ Track borrowed books per member
+- ✅ Real-time availability updates
+
+### 📚 Books Management
+<img width="1342" height="665" alt="image" src="https://github.com/user-attachments/assets/1a58badc-d902-4d30-8603-15d1315c0a98" />
+Comprehensive book catalog with search and filter options
+User-friendly book addition form with validation
+
 - ✅ Add, edit, and delete books
 - ✅ ISBN validation and duplicate checking
 - ✅ Search books by title, author, or ISBN
@@ -24,11 +36,6 @@ A full-stack library management system built with **Spring Boot** backend and **
 - ✅ Member registration and profile management
 - ✅ Track member lending history
 - ✅ View available books for specific members
-
-### 📋 Lending System
-- ✅ Book lending and return functionality
-- ✅ Track borrowed books per member
-- ✅ Real-time availability updates
 
 ## 🛠️ Technology Stack
 
@@ -45,44 +52,6 @@ A full-stack library management system built with **Spring Boot** backend and **
 - **Build Tool**: Angular CLI
 - **Deployment**: Netlify
 
-## 📱 Application Screenshots
-
-### 🏠 Home Page
-<img width="1347" height="672" alt="image" src="https://github.com/user-attachments/assets/85200997-98cf-490f-a856-592b58117767" />
-*Main dashboard with quick access to all library functions*
-
-### 📚 Books Management
-![Books Page](images/books-page.png)
-*Comprehensive book catalog with search and filter options*
-
-![Add Book](images/add-book.png)
-*User-friendly book addition form with validation*
-
-### 👨‍💼 Authors Management
-![Authors Page](images/authors-page.png)
-*Author directory with complete profiles*
-
-![Add Author](images/add-author.png)
-*Simple author registration form*
-
-### 👥 Members Management
-![Members Page](images/members-page.png)
-*Member management with lending history*
-
-![Add Member](images/add-member.png)
-*Member registration with profile details*
-
-### 📋 Library Dashboard
-![Library Dashboard](images/library-dashboard.png)
-*Central hub for all library operations*
-
-### 📖 Book Lending
-![Book Lending](images/book-lending.png)
-*Intuitive book lending interface*
-
-![Member Books](images/member-books.png)
-*Track books borrowed by specific members*
-
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -96,40 +65,24 @@ A full-stack library management system built with **Spring Boot** backend and **
 git clone https://github.com/lakshaygeek511/BiblioVault.git
 cd BiblioVault
 
-text
-
 2. **Configure database**
 application.properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/bibliovault
 spring.datasource.username=your_username
 spring.datasource.password=your_password
 
-text
-
 3. **Run the backend**
 ./gradlew bootRun
-
-text
-
 Backend will be available at: `http://localhost:8080`
 
 ### Frontend Setup
 
 1. **Navigate to frontend directory**
 cd frontend
-
-text
-
 2. **Install dependencies**
 npm install --legacy-peer-deps
-
-text
-
 3. **Start development server**
 ng serve
-
-text
-
 Frontend will be available at: `http://localhost:4200`
 
 ## 📊 API Endpoints
