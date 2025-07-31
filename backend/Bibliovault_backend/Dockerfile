@@ -3,7 +3,7 @@ FROM openjdk:11-jdk-slim AS build
 
 WORKDIR /app
 
-# Copy Gradle wrapper and build files first (better layer caching)
+# Copy Gradle wrapper and build files first
 COPY gradlew .
 COPY gradle gradle/
 COPY build.gradle .
@@ -12,7 +12,7 @@ COPY settings.gradle .
 # Make gradlew executable
 RUN chmod +x ./gradlew
 
-# Download dependencies (cached layer if dependencies don't change)
+# Download dependencies
 RUN ./gradlew dependencies --no-daemon
 
 # Copy source code
@@ -39,8 +39,8 @@ RUN chown spring:spring /app/app.jar
 # Switch to non-root user
 USER spring
 
-# Expose port
-EXPOSE 8080
+# Expose the port that Render will assign (typically 10000)
+EXPOSE 10000
 
-# Transform DATABASE_URL to JDBC format and run the application
-ENTRYPOINT ["sh", "-c", "export JDBC_DATABASE_URL=\"jdbc:$DATABASE_URL\" && exec java -jar app.jar"]
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
