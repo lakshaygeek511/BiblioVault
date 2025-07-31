@@ -42,5 +42,5 @@ USER spring
 # Expose port
 EXPOSE 8080
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Transform DATABASE_URL to JDBC format and run the application
+ENTRYPOINT ["sh", "-c", "export JDBC_DATABASE_URL=\"jdbc:$DATABASE_URL\" && exec java -jar app.jar"]
