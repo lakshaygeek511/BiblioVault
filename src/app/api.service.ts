@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { catchError, retry } from 'rxjs/operators';
 
-const apiBaseUrl = "http://localhost:8080/api/library"
+const apiBaseUrl = "https://bibliovault-api.onrender.com/api/library"
 
 @Injectable({
   providedIn: 'root'
