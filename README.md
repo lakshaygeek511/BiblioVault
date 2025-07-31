@@ -48,7 +48,7 @@ A full-stack library management system built with **Spring Boot** backend and **
 ## 📱 Application Screenshots
 
 ### 🏠 Home Page
-![Home Page](images/home-page.png)
+<img width="1347" height="672" alt="image" src="https://github.com/user-attachments/assets/85200997-98cf-490f-a856-592b58117767" />
 *Main dashboard with quick access to all library functions*
 
 ### 📚 Books Management
